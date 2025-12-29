@@ -9,156 +9,137 @@
 	<script language="JavaScript">var J$ = jQuery.noConflict();</script>
 
 	<style type="text/css">
-		/* =========================================================
-		   색상 팔레트(원본 teal -> 블루/인디고 계열로 변경)
-		   ========================================================= */
-		:root{
-			--brand:#3b82f6;      /* 메인(블루) */
-			--brand2:#1d4ed8;     /* 진한 블루 */
-			--text:#000000;       /* 기본 텍스트 */
-			--text-strong:#111827;
-			--muted:#9ca3af;
-			--line:#e5e7eb;
-			--bg:#f8fafc;
-			--card:#ffffff;
-			--chip:#ffffff;
-			--chip-line:#e5e7eb;
-			--chip-hover:#d1d5db;
-			/* 안내 문구(top_txt) 글씨를 검정색으로 */
-.pop_susi_competition .pbody .top_txt,
-.pop_susi_competition .pbody .top_txt strong{
-	color:#000000;
-		}
+	/* =========================================================
+	   색상 팔레트
+	   ========================================================= */
+	:root{
+		--brand:#3b82f6;      /* 메인(블루) */
+		--brand2:#1d4ed8;     /* 진한 블루 */
+		--text:#000000;       /* 기본 텍스트 (검정) */
+		--text-strong:#111827;
+		--muted:#9ca3af;
+		--line:#e5e7eb;
+		--bg:#f8fafc;
+		--card:#ffffff;
+		--chip:#ffffff;
+		--chip-line:#e5e7eb;
+		--chip-hover:#d1d5db;
+	}
 
-		/* ===== 기존 공통 ===== */
-		body,h1,h2,h3,h4,th,td,p {margin:0;padding:0;color:var(--text);font-family:'돋움',dotum, sans-serif;font-size:12px;font-weight:normal;}
-		li{list-style:none}
-		table{border-collapse:collapse;border-spacing:0}
-		img {border:none;}
+	/* ===== 기존 공통 ===== */
+	body,h1,h2,h3,h4,th,td,p {
+		margin:0;
+		padding:0;
+		color:var(--text);
+		font-family:'돋움',dotum, sans-serif;
+		font-size:12px;
+		font-weight:normal;
+	}
+	li{list-style:none}
+	table{border-collapse:collapse;border-spacing:0}
+	img {border:none;}
 
-		/* ===== 헤더 ===== */
-		.pop_susi_competition {background:var(--bg);}
-		.pop_susi_competition .phead{height:70px;border-bottom:1px dotted #777; position:relative; background:#fff;}
-		.pop_susi_competition .phead h1{
-			font-size:22px;color:var(--text-strong);font-weight:bold;line-height:70px;
-			padding-left:30px;letter-spacing:-1px;
-			font-family:'Malgun Gothic','맑은고딕','돋움',dotum, sans-serif;
-		}
-		.pop_susi_competition .phead strong{color:var(--brand);}
-		.pop_susi_competition .phead .btn_close{
-			display:block;position:absolute;right:6px;top:0;width:70px;height:70px;
-			background:url(//images/bg/images/btn_close.gif) no-repeat center center;
-			text-indent:-1000em;
-		}
+	/* ===== 헤더 ===== */
+	.pop_susi_competition {background:var(--bg);}
+	.pop_susi_competition .phead{
+		height:70px;
+		border-bottom:1px dotted #777;
+		position:relative;
+		background:#fff;
+	}
+	.pop_susi_competition .phead h1{
+		font-size:22px;
+		color:var(--text-strong);
+		font-weight:bold;
+		line-height:70px;
+		padding-left:30px;
+		letter-spacing:-1px;
+		font-family:'Malgun Gothic','맑은고딕','돋움',dotum, sans-serif;
+	}
+	.pop_susi_competition .phead strong{color:var(--brand);}
+	.pop_susi_competition .phead .btn_close{
+		display:block;
+		position:absolute;
+		right:6px;
+		top:0;
+		width:70px;
+		height:70px;
+		background:url(//images/bg/images/btn_close.gif) no-repeat center center;
+		text-indent:-1000em;
+	}
 
-		/* ===== 바디 ===== */
-		.pop_susi_competition .pbody{padding:0 30px;}
-		.pop_susi_competition .pbody .top_txt{
-			margin-top:10px;padding:8px 0 6px;
-			font-size:12px;color:var(--muted);line-height:20px;
-		}
-		.pop_susi_competition .pbody .top_txt strong{color:var(--text);}
+	/* ===== 바디 ===== */
+	.pop_susi_competition .pbody{padding:0 30px;}
 
-		/* =========================================================
-		   레이아웃 변경: 표 -> 지역별 카드(Grid)
-		   ========================================================= */
-		.pop_susi_competition .pbody .tbl{border:0; margin-top:12px;}
-		.pop_susi_competition .pbody table{width:100%; border-collapse:separate; border-spacing:0;}
+	/* ❌ 회색 지정 제거 */
+	.pop_susi_competition .pbody .top_txt{
+		margin-top:10px;
+		padding:8px 0 6px;
+		font-size:12px;
+		line-height:20px;
+	}
 
-		/* 헤더 숨김 */
-		.pop_susi_competition .pbody table thead{display:none;}
+	/* ✅ 안내 문구는 무조건 검정 */
+	.pop_susi_competition .pbody .top_txt,
+	.pop_susi_competition .pbody .top_txt strong{
+		color:#000000;
+	}
 
-		/* 카드 그리드 */
+	/* =========================================================
+	   레이아웃: 카드 그리드
+	   ========================================================= */
+	.pop_susi_competition .pbody .tbl{border:0; margin-top:12px;}
+	.pop_susi_competition .pbody table{
+		width:100%;
+		border-collapse:separate;
+		border-spacing:0;
+	}
+
+	.pop_susi_competition .pbody table thead{display:none;}
+
+	.pop_susi_competition .pbody table tbody{
+		display:grid;
+		grid-template-columns:repeat(2, minmax(0, 1fr));
+		gap:16px;
+	}
+
+	.pop_susi_competition .pbody table tbody tr{
+		display:block;
+		background:var(--card);
+		border:1px solid var(--line);
+		border-radius:14px;
+		overflow:hidden;
+		box-shadow:0 2px 10px rgba(0,0,0,0.04);
+	}
+
+	.pop_susi_competition .pbody table tbody th{
+		display:block;
+		padding:14px 16px;
+		font-weight:bold;
+		color:var(--text-strong);
+		font-size:14px;
+		background:linear-gradient(
+			90deg,
+			rgba(59,130,246,0.14),
+			rgba(59,130,246,0.03)
+		);
+	}
+
+	.pop_susi_competition .pbody table tbody td{
+		display:block;
+		padding:12px 16px 16px;
+		background:#fff;
+	}
+
+	/* 반응형 */
+	@media (max-width:900px){
+		.pop_susi_competition .pbody{padding:0 16px;}
 		.pop_susi_competition .pbody table tbody{
-			display:grid;
-			grid-template-columns:repeat(2, minmax(0, 1fr));
-			gap:16px;
+			grid-template-columns:1fr;
 		}
+	}
+</style>
 
-		/* 카드 */
-		.pop_susi_competition .pbody table tbody tr{
-			display:block;
-			background:var(--card);
-			border:1px solid var(--line);
-			border-radius:14px;
-			overflow:hidden;
-			box-shadow:0 2px 10px rgba(0,0,0,0.04);
-		}
-
-		/* 지역 타이틀 */
-		.pop_susi_competition .pbody table tbody th{
-			display:block;
-			width:auto;
-			padding:14px 16px;
-			border:0;
-			font-weight:bold;
-			color:var(--text-strong);
-			font-size:14px;
-			background:linear-gradient(90deg, rgba(59,130,246,0.14), rgba(59,130,246,0.03));
-		}
-
-		/* 대학 목록 영역 */
-		.pop_susi_competition .pbody table tbody td{
-			display:block;
-			padding:12px 16px 16px;
-			border:0;
-			background:#fff;
-		}
-
-		/* 대학 리스트 */
-		.pop_susi_competition .pbody table tbody td ul{
-			margin:0;
-			padding:0;
-			display:flex;
-			flex-wrap:wrap;
-			gap:8px 10px;
-		}
-		.pop_susi_competition .pbody table tbody td li{
-			float:none;
-			width:auto;
-			line-height:1;
-		}
-
-		/* 대학 링크(칩) */
-		.pop_susi_competition .pbody table tbody td li a{
-			display:inline-block;
-			padding:8px 10px;
-			border:1px solid var(--chip-line);
-			border-radius:999px;
-			text-decoration:none;
-			font-weight:700;
-			color:#374151;
-			background:var(--chip);
-			line-height:1;
-		}
-		.pop_susi_competition .pbody table tbody td li a:hover{
-			border-color:var(--chip-hover);
-			background:#f9fafb;
-		}
-		.pop_susi_competition .pbody table tbody td li a.on{
-			border-color:rgba(59,130,246,0.55);
-			color:var(--brand2);
-			background:rgba(59,130,246,0.08);
-		}
-
-		/* 링크 없는 대학(칩처럼) - JS가 class 부여 */
-		.pop_susi_competition .pbody table tbody td li.no-link{
-			display:inline-block;
-			padding:8px 10px;
-			border:1px dashed #d1d5db;
-			border-radius:999px;
-			color:#9ca3af;
-			background:#fafafa;
-			line-height:1;
-			font-weight:700;
-		}
-
-		/* 반응형 */
-		@media (max-width: 900px){
-			.pop_susi_competition .pbody{padding:0 16px;}
-			.pop_susi_competition .pbody table tbody{grid-template-columns:1fr;}
-		}
-	</style>
 
 	<script type="text/javascript">
 		/* jQuery 1.8.3 호환:
@@ -538,6 +519,7 @@
 
 </body>
 </html>
+
 
 
 
