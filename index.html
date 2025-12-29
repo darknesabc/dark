@@ -3,65 +3,97 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
 	<meta http-equiv="imagetoolbar" content="no" />
-	<title>2026학년도 정시 지원 실시간 경쟁률</title>	
+	<title>2026학년도 정시 지원 실시간 경쟁률</title>
 	<link rel="stylesheet" href="https://www.etoos.com/common/css/etoos_main2021.css?v=37690.85" type="text/css">
 	<script type="text/javascript" src="https://www.etoos.com/common/js/jquery/jquery-1.8.3.min.js"></script>
 	<script language="JavaScript">var J$ = jQuery.noConflict();</script>
 
 	<style type="text/css">
-		/* ===== 기존 스타일 (원본) ===== */
-		body,h1,h2,h3,h4,th,td,p {margin:0;padding:0;color:#666;font-family:'돋움',dotum, sans-serif;font-size:12px;font-weight:normal;}
+		/* =========================================================
+		   색상 팔레트(원본 teal -> 블루/인디고 계열로 변경)
+		   ========================================================= */
+		:root{
+			--brand:#3b82f6;      /* 메인(블루) */
+			--brand2:#1d4ed8;     /* 진한 블루 */
+			--text:#4b5563;       /* 기본 텍스트 */
+			--text-strong:#111827;
+			--muted:#9ca3af;
+			--line:#e5e7eb;
+			--bg:#f8fafc;
+			--card:#ffffff;
+			--chip:#ffffff;
+			--chip-line:#e5e7eb;
+			--chip-hover:#d1d5db;
+		}
+
+		/* ===== 기존 공통 ===== */
+		body,h1,h2,h3,h4,th,td,p {margin:0;padding:0;color:var(--text);font-family:'돋움',dotum, sans-serif;font-size:12px;font-weight:normal;}
 		li{list-style:none}
 		table{border-collapse:collapse;border-spacing:0}
 		img {border:none;}
 
-		.pop_susi_competition .phead{height:70px;border-bottom:1px dotted #777; position:relative;}
-		.pop_susi_competition .phead h1{font-size:22px;color:#000;font-weight:bold;line-height:70px;padding-left:30px;letter-spacing:-1px;font-family:'Malgun Gothic','맑은고딕','돋움',dotum, sans-serif;}
-		.pop_susi_competition .phead strong{color:#1fa8a6;}
-		.pop_susi_competition .phead .btn_close{display:block;position:absolute;right:6px;top:0;width:70px;height:70px;background:url(//images/bg/images/btn_close.gif) no-repeat center center;text-indent:-1000em;}
+		/* ===== 헤더 ===== */
+		.pop_susi_competition {background:var(--bg);}
+		.pop_susi_competition .phead{height:70px;border-bottom:1px dotted #777; position:relative; background:#fff;}
+		.pop_susi_competition .phead h1{
+			font-size:22px;color:var(--text-strong);font-weight:bold;line-height:70px;
+			padding-left:30px;letter-spacing:-1px;
+			font-family:'Malgun Gothic','맑은고딕','돋움',dotum, sans-serif;
+		}
+		.pop_susi_competition .phead strong{color:var(--brand);}
+		.pop_susi_competition .phead .btn_close{
+			display:block;position:absolute;right:6px;top:0;width:70px;height:70px;
+			background:url(//images/bg/images/btn_close.gif) no-repeat center center;
+			text-indent:-1000em;
+		}
+
+		/* ===== 바디 ===== */
 		.pop_susi_competition .pbody{padding:0 30px;}
-		.pop_susi_competition .pbody .top_txt{margin-top:10px;padding:5px 0;font-size:12px;color:#999;line-height:20px;}
-		.pop_susi_competition .pbody .top_txt strong{color:#666;}
-		.pop_susi_competition .pbody .btn_down a{display:inline-block;margin-bottom:20px;padding:0 20px;color:#fff;font-size:12px;font-weight:bold;background:#12938e;line-height:30px;text-decoration:none;}
+		.pop_susi_competition .pbody .top_txt{
+			margin-top:10px;padding:8px 0 6px;
+			font-size:12px;color:var(--muted);line-height:20px;
+		}
+		.pop_susi_competition .pbody .top_txt strong{color:var(--text);}
 
-		/* ====== 여기부터 레이아웃 변경 핵심(CARD GRID) ====== */
-
-		/* 테두리/표 느낌 제거 */
-		.pop_susi_competition .pbody .tbl{border:0;}
+		/* =========================================================
+		   레이아웃 변경: 표 -> 지역별 카드(Grid)
+		   ========================================================= */
+		.pop_susi_competition .pbody .tbl{border:0; margin-top:12px;}
 		.pop_susi_competition .pbody table{width:100%; border-collapse:separate; border-spacing:0;}
 
-		/* thead(지역/대학명 헤더) 숨김 */
+		/* 헤더 숨김 */
 		.pop_susi_competition .pbody table thead{display:none;}
 
-		/* tbody를 그리드로: 지역 카드들이 2열로 배치됨 */
+		/* 카드 그리드 */
 		.pop_susi_competition .pbody table tbody{
 			display:grid;
 			grid-template-columns:repeat(2, minmax(0, 1fr));
 			gap:16px;
 		}
 
-		/* 각 지역 row(tr)를 카드로 */
+		/* 카드 */
 		.pop_susi_competition .pbody table tbody tr{
 			display:block;
-			border:1px solid #ddd;
-			border-radius:12px;
-			background:#fff;
+			background:var(--card);
+			border:1px solid var(--line);
+			border-radius:14px;
 			overflow:hidden;
+			box-shadow:0 2px 10px rgba(0,0,0,0.04);
 		}
 
-		/* 지역 제목(th) */
+		/* 지역 타이틀 */
 		.pop_susi_competition .pbody table tbody th{
 			display:block;
 			width:auto;
 			padding:14px 16px;
-			background:#f6f7f8;
 			border:0;
 			font-weight:bold;
-			color:#111;
+			color:var(--text-strong);
 			font-size:14px;
+			background:linear-gradient(90deg, rgba(59,130,246,0.14), rgba(59,130,246,0.03));
 		}
 
-		/* 대학 목록(td) */
+		/* 대학 목록 영역 */
 		.pop_susi_competition .pbody table tbody td{
 			display:block;
 			padding:12px 16px 16px;
@@ -69,7 +101,7 @@
 			background:#fff;
 		}
 
-		/* ul/li를 pill 목록처럼 */
+		/* 대학 리스트 */
 		.pop_susi_competition .pbody table tbody td ul{
 			margin:0;
 			padding:0;
@@ -77,646 +109,429 @@
 			flex-wrap:wrap;
 			gap:8px 10px;
 		}
-
 		.pop_susi_competition .pbody table tbody td li{
 			float:none;
 			width:auto;
 			line-height:1;
-			color:#666;
 		}
 
-		/* 링크가 있는 대학: pill 버튼 */
+		/* 대학 링크(칩) */
 		.pop_susi_competition .pbody table tbody td li a{
 			display:inline-block;
 			padding:8px 10px;
-			border:1px solid #e5e5e5;
+			border:1px solid var(--chip-line);
 			border-radius:999px;
 			text-decoration:none;
-			font-weight:600;
-			color:#555;
-			background:#fff;
+			font-weight:700;
+			color:#374151;
+			background:var(--chip);
 			line-height:1;
 		}
-
 		.pop_susi_competition .pbody table tbody td li a:hover{
-			border-color:#cfcfcf;
+			border-color:var(--chip-hover);
+			background:#f9fafb;
 		}
-
 		.pop_susi_competition .pbody table tbody td li a.on{
-			border-color:#1fa8a6;
-			color:#1fa8a6;
+			border-color:rgba(59,130,246,0.55);
+			color:var(--brand2);
+			background:rgba(59,130,246,0.08);
 		}
 
-		/* 링크가 없는 대학(li에 a가 없음): 점선 pill */
-		.pop_susi_competition .pbody table tbody td li{
-			padding:0;
-		}
+		/* 링크 없는 대학(칩처럼) - JS가 class 부여 */
 		.pop_susi_competition .pbody table tbody td li.no-link{
 			display:inline-block;
 			padding:8px 10px;
-			border:1px dashed #ddd;
+			border:1px dashed #d1d5db;
 			border-radius:999px;
-			color:#999;
+			color:#9ca3af;
+			background:#fafafa;
 			line-height:1;
+			font-weight:700;
 		}
 
-		/* 반응형: 화면 좁으면 1열 */
+		/* 반응형 */
 		@media (max-width: 900px){
 			.pop_susi_competition .pbody{padding:0 16px;}
-			.pop_susi_competition .pbody table tbody{
-				grid-template-columns:1fr;
-			}
+			.pop_susi_competition .pbody table tbody{grid-template-columns:1fr;}
 		}
 	</style>
+
+	<script type="text/javascript">
+		/* jQuery 1.8.3 호환:
+		   링크 없는 대학(<li>텍스트만</li>)에 no-link 클래스를 자동으로 붙여서 칩처럼 표시 */
+		J$(function(){
+			J$('.pop_susi_competition .pbody table tbody td li').each(function(){
+				if (J$(this).find('a').length === 0){
+					J$(this).addClass('no-link');
+				}
+			});
+		});
+	</script>
 </head>
 
-<body> <!-- 팝업 가로사이즈 760px -->
+<body>
 <div id="etoosHead" style="display:none;"></div>
 
-	<div class="pop_susi_competition" style="padding-bottom:20px">
-		<div class="phead"> 
-			<h1>2026학년도 정시 지원 <strong>실시간 경쟁률</strong></h1>
-			<a href="javascript:window.close();" class="btn_close">닫기</a>
-		</div>
-		<div class="pbody">
-			<p class="top_txt">
-				- 본 경쟁률은 각 대학에서 발표하는 실시간 지원 경쟁률이며, 최종 실제 지원 경쟁률은 본 내용과 다를 수 있으므로<br />
-			   	&nbsp; 대학 홈페이지를 통해 확인하시기 바랍니다. <br />
-				- 클릭이 되지 않는 대학은 경쟁률을 공개하지 않거나, 원서 접수 이전의 대학입니다.<br />
-				<!-- - 2018학년도 수시 경쟁률을 확인하고 싶으시면 <strong>2018학년도 수시 경쟁률 검색기</strong>를 다운로드하여 확인하세요. -->
-			</p>
-			<!--
-			<div class="btn_down">
-				<a href="javascript:fnNeedLogin();void(0);">2018학년도 수시 경쟁률 검색기 다운로드 <img src="//images/bg/ico_down.gif" alt="" /></a>
-			</div>
-			-->
-			<div class="tbl">
-				<table>
-					<thead>
-						<tr>
-							<th scope="col">지역</th>
-							<th scope="col">대학명</th>
-						</tr>
-					</thead>
-					<tbody>
-					
+<div class="pop_susi_competition" style="padding-bottom:20px">
+	<div class="phead">
+		<h1>2026학년도 정시 지원 <strong>실시간 경쟁률</strong></h1>
+		<a href="javascript:window.close();" class="btn_close">닫기</a>
+	</div>
+
+	<div class="pbody">
+		<p class="top_txt">
+			- 본 경쟁률은 각 대학에서 발표하는 실시간 지원 경쟁률이며, 최종 실제 지원 경쟁률은 본 내용과 다를 수 있으므로<br />
+			&nbsp; 대학 홈페이지를 통해 확인하시기 바랍니다. <br />
+			- 클릭이 되지 않는 대학은 경쟁률을 공개하지 않거나, 원서 접수 이전의 대학입니다.<br />
+		</p>
+
+		<div class="tbl">
+			<table>
+				<thead>
+					<tr>
+						<th scope="col">지역</th>
+						<th scope="col">대학명</th>
+					</tr>
+				</thead>
+
+				<tbody>
 					<tr>
 						<th>서울</th>
 						<td>
 							<ul>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KTCVDYXwwOExKclc6L0otZlRm" class="on" target="new">가톨릭대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KJjBNSnJXOi9KLWZUZg==" class="on" target="new">감리교신대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10360701.html" class="on" target="new">강서대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10080331.html" class="on" target="new">건국대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOnw5SnJXOi9KLWZUZg==" class="on" target="new">경희대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOGB9YTlKclc6L0otZlRm" class="on" target="new">고려대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KTjlKclc6L0otZlRm" class="on" target="new">광운대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KVyVNOWFhOUpyVzovSi1mVGY=" class="on" target="new">국민대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10530571.html" class="on" target="new">덕성여대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10550471.html" class="on" target="new">동국대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOTpWcldhVkpyVzovSi1mVGY=" class="on" target="new">동덕여대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10650671.html" class="on" target="new">명지대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10760641.html" class="on" target="new">삼육대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOk0mSnJXOi9KLWZUZg==" class="on" target="new">상명대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio12050441.html" class="on" target="new">서강대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10810611.html" class="on" target="new">서경대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KMDpXJkpyVzovSi1mVGY=" class="on" target="new">서울과학기술대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KYDpXJkpyVzovSi1mVGY=" class="on" target="new">서울교대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10520521.html" class="on" target="new">서울기독대</a></li>
-								
-											<li><a href="https://admission.snu.ac.kr/ipsi260908.html" class="on" target="new">서울대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KJmE6SnJXOi9KLWZUZg==" class="on" target="new">서울시립대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10860661.html" class="on" target="new">서울여대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11660401.html" class="on" target="new">서울한영대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10910461.html" class="on" target="new">성공회대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10920501.html" class="on" target="new">성균관대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10930121.html" class="on" target="new">성신여대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10950641.html" class="on" target="new">세종대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10981281.html" class="on" target="new">숙명여대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11010721.html" class="on" target="new">숭실대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11080721.html" class="on" target="new">연세대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11201731.html" class="on" target="new">이화여대</a></li>
-								
-											<li><a href="http://ratio.uwayapply.com/Sl5KJjBMaUpyVzovSi1mVGY=" class="on" target="new">장로회신대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOjhMSnJXOi9KLWZUZg==" class="on" target="new">중앙대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KVyV8JnJXYXxMSnJXOi9KLWZUZg==" class="on" target="new">총신대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KYGJyOnxMSnJXOi9KLWZUZg==" class="on" target="new">추계예대</a></li>
-								
-											<li><a href="https://ipsi.bible.ac.kr/summary/Summary2023j.aspx" class="on" target="new">한국성서대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KJmg6fEpyVzovSi1mVGY=" class="on" target="new">한국외대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11530401.html" class="on" target="new">한국체대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5Kclc6Jlc4fEpyVzovSi1mVGY=" class="on" target="new">한성대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11640511.html" class="on" target="new">한양대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11720771.html" class="on" target="new">홍익대</a></li>
-								
+								<li><a href="https://ratio.uwayapply.com/Sl5KTCVDYXwwOExKclc6L0otZlRm" class="on" target="new">가톨릭대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KJjBNSnJXOi9KLWZUZg==" class="on" target="new">감리교신대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10360701.html" class="on" target="new">강서대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10080331.html" class="on" target="new">건국대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOnw5SnJXOi9KLWZUZg==" class="on" target="new">경희대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOGB9YTlKclc6L0otZlRm" class="on" target="new">고려대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KTjlKclc6L0otZlRm" class="on" target="new">광운대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KVyVNOWFhOUpyVzovSi1mVGY=" class="on" target="new">국민대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10530571.html" class="on" target="new">덕성여대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10550471.html" class="on" target="new">동국대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOTpWcldhVkpyVzovSi1mVGY=" class="on" target="new">동덕여대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10650671.html" class="on" target="new">명지대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10760641.html" class="on" target="new">삼육대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOk0mSnJXOi9KLWZUZg==" class="on" target="new">상명대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio12050441.html" class="on" target="new">서강대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10810611.html" class="on" target="new">서경대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KMDpXJkpyVzovSi1mVGY=" class="on" target="new">서울과학기술대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KYDpXJkpyVzovSi1mVGY=" class="on" target="new">서울교대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10520521.html" class="on" target="new">서울기독대</a></li>
+								<li><a href="https://admission.snu.ac.kr/ipsi260908.html" class="on" target="new">서울대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KJmE6SnJXOi9KLWZUZg==" class="on" target="new">서울시립대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10860661.html" class="on" target="new">서울여대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11660401.html" class="on" target="new">서울한영대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10910461.html" class="on" target="new">성공회대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10920501.html" class="on" target="new">성균관대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10930121.html" class="on" target="new">성신여대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10950641.html" class="on" target="new">세종대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10981281.html" class="on" target="new">숙명여대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11010721.html" class="on" target="new">숭실대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11080721.html" class="on" target="new">연세대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11201731.html" class="on" target="new">이화여대</a></li>
+								<li><a href="http://ratio.uwayapply.com/Sl5KJjBMaUpyVzovSi1mVGY=" class="on" target="new">장로회신대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOjhMSnJXOi9KLWZUZg==" class="on" target="new">중앙대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KVyV8JnJXYXxMSnJXOi9KLWZUZg==" class="on" target="new">총신대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KYGJyOnxMSnJXOi9KLWZUZg==" class="on" target="new">추계예대</a></li>
+								<li><a href="https://ipsi.bible.ac.kr/summary/Summary2023j.aspx" class="on" target="new">한국성서대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KJmg6fEpyVzovSi1mVGY=" class="on" target="new">한국외대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11530401.html" class="on" target="new">한국체대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5Kclc6Jlc4fEpyVzovSi1mVGY=" class="on" target="new">한성대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11640511.html" class="on" target="new">한양대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11720771.html" class="on" target="new">홍익대</a></li>
 							</ul>
 						</td>
 					</tr>
-					
+
 					<tr>
 						<th>인천</th>
 						<td>
 							<ul>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio20060241.html" class="on" target="new">경인교대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOkxMJUpyVzovSi1mVGY=" class="on" target="new">인천가톨릭대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11230671.html" class="on" target="new">인천대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOHxXJUpyVzovSi1mVGY=" class="on" target="new">인하대</a></li>
-								
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio20060241.html" class="on" target="new">경인교대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOkxMJUpyVzovSi1mVGY=" class="on" target="new">인천가톨릭대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11230671.html" class="on" target="new">인천대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOHxXJUpyVzovSi1mVGY=" class="on" target="new">인하대</a></li>
 							</ul>
 						</td>
 					</tr>
-					
+
 					<tr>
 						<th>경기</th>
 						<td>
 							<ul>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10190591.html" class="on" target="new">가천대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KTThXclc4OUpyVzovSi1mVGY=" class="on" target="new">강남대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KJXJyV2FiOUpyVzovSi1mVGY=" class="on" target="new">경기대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10420451.html" class="on" target="new">단국대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KVyUvYDhWSnJXOi9KLWZUZg==" class="on" target="new">대진대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOjBDSnJXOi9KLWZUZg==" class="on" target="new">루터대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOjAmSnJXOi9KLWZUZg==" class="on" target="new">서울신대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KVyUmclc4L0M6YWAmSnJXOi9KLWZUZg==" class="on" target="new">서울장신대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10900691.html" class="on" target="new">성결대</a></li>
-								
-											<li>수원가톨릭대</li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10970421.html" class="on" target="new">수원대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11870691.html" class="on" target="new">신한대</a></li>
-								
-											<li>아신대</li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11040651.html" class="on" target="new">아주대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5Kclc4Ylc4SnJXOi9KLWZUZg==" class="on" target="new">안양대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KVyVyV2FiSnJXOi9KLWZUZg==" class="on" target="new">용인대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11190611.html" class="on" target="new">을지대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOHxMSnJXOi9KLWZUZg==" class="on" target="new">차의과학대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KVyVEQzhMSnJXOi9KLWZUZg==" class="on" target="new">칼빈대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOjBpSnJXOi9KLWZUZg==" class="on" target="new">평택대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio30161041.html" class="on" target="new">한경국립대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio30170641.html" class="on" target="new">한국공학대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KJmg6fEpyVzovSi1mVGY=" class="on" target="new">한국외대(글로벌)</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11540891.html" class="on" target="new">한국항공대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KJWAmVzh8SnJXOi9KLWZUZg==" class="on" target="new">한세대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11630411.html" class="on" target="new">한신대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11650671.html" class="on" target="new">한양대(ERICA)</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5Kclc6Jmk6YnxKclc6L0otZlRm" class="on" target="new">협성대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11880411.html" class="on" target="new">화성의과학대</a></li>
-								
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10190591.html" class="on" target="new">가천대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KTThXclc4OUpyVzovSi1mVGY=" class="on" target="new">강남대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KJXJyV2FiOUpyVzovSi1mVGY=" class="on" target="new">경기대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10420451.html" class="on" target="new">단국대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KVyUvYDhWSnJXOi9KLWZUZg==" class="on" target="new">대진대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOjBDSnJXOi9KLWZUZg==" class="on" target="new">루터대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOjAmSnJXOi9KLWZUZg==" class="on" target="new">서울신대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KVyUmclc4L0M6YWAmSnJXOi9KLWZUZg==" class="on" target="new">서울장신대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10900691.html" class="on" target="new">성결대</a></li>
+								<li>수원가톨릭대</li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10970421.html" class="on" target="new">수원대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11870691.html" class="on" target="new">신한대</a></li>
+								<li>아신대</li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11040651.html" class="on" target="new">아주대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5Kclc4Ylc4SnJXOi9KLWZUZg==" class="on" target="new">안양대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KVyVyV2FiSnJXOi9KLWZUZg==" class="on" target="new">용인대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11190611.html" class="on" target="new">을지대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOHxMSnJXOi9KLWZUZg==" class="on" target="new">차의과학대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KVyVEQzhMSnJXOi9KLWZUZg==" class="on" target="new">칼빈대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOjBpSnJXOi9KLWZUZg==" class="on" target="new">평택대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio30161041.html" class="on" target="new">한경국립대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio30170641.html" class="on" target="new">한국공학대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KJmg6fEpyVzovSi1mVGY=" class="on" target="new">한국외대(글로벌)</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11540891.html" class="on" target="new">한국항공대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KJWAmVzh8SnJXOi9KLWZUZg==" class="on" target="new">한세대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11630411.html" class="on" target="new">한신대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11650671.html" class="on" target="new">한양대(ERICA)</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5Kclc6Jmk6YnxKclc6L0otZlRm" class="on" target="new">협성대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11880411.html" class="on" target="new">화성의과학대</a></li>
 							</ul>
 						</td>
 					</tr>
-					
+
 					<tr>
 						<th>강원</th>
 						<td>
 							<ul>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOjlMSnJXOi9KLWZUZg==" class="on" target="new">가톨릭관동대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOldOckpyVzovSi1mVGY=" class="on" target="new">강릉원주대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KV2FOclc4OUpyVzovSi1mVGY=" class="on" target="new">강원대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KV2FOclc4OUpyVzovSi1mVGY=" class="on" target="new">강원대(삼척)</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10140381.html" class="on" target="new">경동대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KJS9yVzgmSnJXOi9KLWZUZg==" class="on" target="new">상지대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KZiVgJldhYkpyVzovSi1mVGY=" class="on" target="new">연세대(미래)</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio20110301.html" class="on" target="new">춘천교대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOENDOHxKclc6L0otZlRm" class="on" target="new">한라대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KTWJDQzh8SnJXOi9KLWZUZg==" class="on" target="new">한림대</a></li>
-								
+								<li><a href="https://ratio.uwayapply.com/Sl5KOjlMSnJXOi9KLWZUZg==" class="on" target="new">가톨릭관동대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOldOckpyVzovSi1mVGY=" class="on" target="new">강릉원주대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KV2FOclc4OUpyVzovSi1mVGY=" class="on" target="new">강원대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KV2FOclc4OUpyVzovSi1mVGY=" class="on" target="new">강원대(삼척)</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10140381.html" class="on" target="new">경동대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KJS9yVzgmSnJXOi9KLWZUZg==" class="on" target="new">상지대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KZiVgJldhYkpyVzovSi1mVGY=" class="on" target="new">연세대(미래)</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio20110301.html" class="on" target="new">춘천교대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOENDOHxKclc6L0otZlRm" class="on" target="new">한라대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KTWJDQzh8SnJXOi9KLWZUZg==" class="on" target="new">한림대</a></li>
 							</ul>
 						</td>
 					</tr>
-					
+
 					<tr>
 						<th>충북</th>
 						<td>
 							<ul>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KMGE5OUpyVzovSi1mVGY=" class="on" target="new">가톨릭꽃동네대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10091121.html" class="on" target="new">건국대(글로컬)</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOlY5SnJXOi9KLWZUZg==" class="on" target="new">극동대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10880541.html" class="on" target="new">서원대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5Kclc6Yk1gJkpyVzovSi1mVGY=" class="on" target="new">세명대</a></li>
-								
-											<li><a href="https://ipsi.u1.ac.kr/ipsi/competition/type02-ratio.do" class="on" target="new">유원대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11920231.html" class="on" target="new">중원대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio20100311.html" class="on" target="new">청주교대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOi9yV2FgfExKclc6L0otZlRm" class="on" target="new">청주대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11410901.html" class="on" target="new">충북대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11480361.html" class="on" target="new">한국교원대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio30150571.html" class="on" target="new">한국교통대</a></li>
-								
+								<li><a href="https://ratio.uwayapply.com/Sl5KMGE5OUpyVzovSi1mVGY=" class="on" target="new">가톨릭꽃동네대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10091121.html" class="on" target="new">건국대(글로컬)</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOlY5SnJXOi9KLWZUZg==" class="on" target="new">극동대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10880541.html" class="on" target="new">서원대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5Kclc6Yk1gJkpyVzovSi1mVGY=" class="on" target="new">세명대</a></li>
+								<li><a href="https://ipsi.u1.ac.kr/ipsi/competition/type02-ratio.do" class="on" target="new">유원대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11920231.html" class="on" target="new">중원대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio20100311.html" class="on" target="new">청주교대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOi9yV2FgfExKclc6L0otZlRm" class="on" target="new">청주대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11410901.html" class="on" target="new">충북대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11480361.html" class="on" target="new">한국교원대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio30150571.html" class="on" target="new">한국교통대</a></li>
 							</ul>
 						</td>
 					</tr>
-					
+
 					<tr>
 						<th>충남</th>
 						<td>
 							<ul>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10100721.html" class="on" target="new">건양대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KcldhL2AmOzhgfWE5SnJXOi9KLWZUZg==" class="on" target="new">고려대(세종)</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KYDY6L3JXYTlKclc6L0otZlRm" class="on" target="new">공주교대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10280951.html" class="on" target="new">공주대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOnJySnJXOi9KLWZUZg==" class="on" target="new">금강대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOld9YTlKclc6L0otZlRm" class="on" target="new">나사렛대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KQzphYCZNOFdKclc6L0otZlRm" class="on" target="new">남서울대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10420451.html" class="on" target="new">단국대(천안)</a></li>
-								
-											<li>대전가톨릭대</li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KOkJKclc6L0otZlRm" class="on" target="new">백석대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KZjpNJkpyVzovSi1mVGY=" class="on" target="new">상명대(천안)</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KV2FhTVc6JkpyVzovSi1mVGY=" class="on" target="new">선문대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KfEwmSnJXOi9KLWZUZg==" class="on" target="new">순천향대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11310871.html" class="on" target="new">중부대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KV2FhTnJXOnxMSnJXOi9KLWZUZg==" class="on" target="new">청운대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KfExgMDhgfWE5SnJXOi9KLWZUZg==" class="on" target="new">한국기술교대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11600801.html" class="on" target="new">한서대</a></li>
-								
-											<li><a href="https://ratio.uwayapply.com/Sl5KYWAmYXxKclc6L0otZlRm" class="on" target="new">호서대</a></li>
-								
-											<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11720772.html" class="on" target="new">홍익대(세종)</a></li>
-								
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10100721.html" class="on" target="new">건양대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KcldhL2AmOzhgfWE5SnJXOi9KLWZUZg==" class="on" target="new">고려대(세종)</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KYDY6L3JXYTlKclc6L0otZlRm" class="on" target="new">공주교대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10280951.html" class="on" target="new">공주대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOnJySnJXOi9KLWZUZg==" class="on" target="new">금강대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOld9YTlKclc6L0otZlRm" class="on" target="new">나사렛대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KQzphYCZNOFdKclc6L0otZlRm" class="on" target="new">남서울대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10420451.html" class="on" target="new">단국대(천안)</a></li>
+								<li>대전가톨릭대</li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOkJKclc6L0otZlRm" class="on" target="new">백석대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KZjpNJkpyVzovSi1mVGY=" class="on" target="new">상명대(천안)</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KV2FhTVc6JkpyVzovSi1mVGY=" class="on" target="new">선문대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KfEwmSnJXOi9KLWZUZg==" class="on" target="new">순천향대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11310871.html" class="on" target="new">중부대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KV2FhTnJXOnxMSnJXOi9KLWZUZg==" class="on" target="new">청운대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KfExgMDhgfWE5SnJXOi9KLWZUZg==" class="on" target="new">한국기술교대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11600801.html" class="on" target="new">한서대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KYWAmYXxKclc6L0otZlRm" class="on" target="new">호서대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11720772.html" class="on" target="new">홍익대(세종)</a></li>
 							</ul>
 						</td>
 					</tr>
-					
+
 					<tr>
 						<th>대전</th>
 						<td>
 							<ul>
-								
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10500941.html" class="on" target="new">대전대</a></li>
-							
-										<li>대전신대</li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10670691.html" class="on" target="new">목원대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KOkxpSnJXOi9KLWZUZg==" class="on" target="new">배재대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KcldhJmFhTkpyVzovSi1mVGY=" class="on" target="new">우송대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11400421.html" class="on" target="new">충남대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KJjowQjlKclc6L0otZlRm" class="on" target="new">한국침례신대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11560811.html" class="on" target="new">한남대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio30040831.html" class="on" target="new">한밭대</a></li>
-								
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10500941.html" class="on" target="new">대전대</a></li>
+								<li>대전신대</li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10670691.html" class="on" target="new">목원대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOkxpSnJXOi9KLWZUZg==" class="on" target="new">배재대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KcldhJmFhTkpyVzovSi1mVGY=" class="on" target="new">우송대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11400421.html" class="on" target="new">충남대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KJjowQjlKclc6L0otZlRm" class="on" target="new">한국침례신대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11560811.html" class="on" target="new">한남대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio30040831.html" class="on" target="new">한밭대</a></li>
 							</ul>
 						</td>
 					</tr>
-					
+
 					<tr>
 						<th>전북</th>
 						<td>
 							<ul>
-								
-									    <li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10350551.html" class="on" target="new">군산대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KOmlNSnJXOi9KLWZUZg==" class="on" target="new">예수대</a></li>
-							
-										<li>예원예대</li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11150551.html" class="on" target="new">우석대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5Kclc4TjlXYU5Kclc6L0otZlRm" class="on" target="new">원광대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KOldCL0pyVzovSi1mVGY=" class="on" target="new">전북대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KYDpXL0pyVzovSi1mVGY=" class="on" target="new">전주교대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KOi9XYWAvSnJXOi9KLWZUZg==" class="on" target="new">전주대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KQyVXOHxKclc6L0otZlRm" class="on" target="new">한일장신대</a></li>
-							
-										<li><a href="https://intra.howon.ac.kr/IPSI/WEB_JUNGSI/_acceptrate/index.html?smenu=rate&v=3ec0492668aca7dfdec5cc188c95d8b95f9f3ae8e1925acb2f8f80834fe21afe" class="on" target="new">호원대</a></li>
-								
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10350551.html" class="on" target="new">군산대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOmlNSnJXOi9KLWZUZg==" class="on" target="new">예수대</a></li>
+								<li>예원예대</li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11150551.html" class="on" target="new">우석대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5Kclc4TjlXYU5Kclc6L0otZlRm" class="on" target="new">원광대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOldCL0pyVzovSi1mVGY=" class="on" target="new">전북대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KYDpXL0pyVzovSi1mVGY=" class="on" target="new">전주교대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOi9XYWAvSnJXOi9KLWZUZg==" class="on" target="new">전주대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KQyVXOHxKclc6L0otZlRm" class="on" target="new">한일장신대</a></li>
+								<li><a href="https://intra.howon.ac.kr/IPSI/WEB_JUNGSI/_acceptrate/index.html?smenu=rate&v=3ec0492668aca7dfdec5cc188c95d8b95f9f3ae8e1925acb2f8f80834fe21afe" class="on" target="new">호원대</a></li>
 							</ul>
 						</td>
 					</tr>
-					
+
 					<tr>
 						<th>전남</th>
 						<td>
 							<ul>
-								
-										<li>광주가톨릭대</li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KOlclfCZyV2FWSnJXOi9KLWZUZg==" class="on" target="new">동신대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KOkxNSnJXOi9KLWZUZg==" class="on" target="new">목포가톨릭대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10690221.html" class="on" target="new">목포대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10700481.html" class="on" target="new">목포해양대</a></li>
-							
-										<li><a href="https://apply.sehan.ac.kr/apply/" class="on" target="new">세한대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10990431.html" class="on" target="new">순천대</a></li>
-							
-										<li>영산선학대</li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5Kclc4VmF8TEpyVzovSi1mVGY=" class="on" target="new">초당대</a></li>
-								
+								<li>광주가톨릭대</li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOlclfCZyV2FWSnJXOi9KLWZUZg==" class="on" target="new">동신대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOkxNSnJXOi9KLWZUZg==" class="on" target="new">목포가톨릭대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10690221.html" class="on" target="new">목포대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10700481.html" class="on" target="new">목포해양대</a></li>
+								<li><a href="https://apply.sehan.ac.kr/apply/" class="on" target="new">세한대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10990431.html" class="on" target="new">순천대</a></li>
+								<li>영산선학대</li>
+								<li><a href="https://ratio.uwayapply.com/Sl5Kclc4VmF8TEpyVzovSi1mVGY=" class="on" target="new">초당대</a></li>
 							</ul>
 						</td>
 					</tr>
-					
+
 					<tr>
 						<th>광주</th>
 						<td>
 							<ul>
-								
-										<li>광신대</li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KYDY6L3JXOE45SnJXOi9KLWZUZg==" class="on" target="new">광주교대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KOi9yVzhOckpyVzovSi1mVGY=" class="on" target="new">광주대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KOk45SnJXOi9KLWZUZg==" class="on" target="new">광주여대</a></li>
-							
-										<li><a href="http://ratio.uwayapply.com/Sl5KOkJNOFdKclc6L0otZlRm" class="on" target="new">남부대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KV2FOcldhJkpyVzovSi1mVGY=" class="on" target="new">송원대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KOlcvSnJXOi9KLWZUZg==" class="on" target="new">전남대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11300511.html" class="on" target="new">조선대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11690581.html" class="on" target="new">호남대</a></li>
-							
-										<li>호남신대</li>
-								
+								<li>광신대</li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KYDY6L3JXOE45SnJXOi9KLWZUZg==" class="on" target="new">광주교대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOi9yVzhOckpyVzovSi1mVGY=" class="on" target="new">광주대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOk45SnJXOi9KLWZUZg==" class="on" target="new">광주여대</a></li>
+								<li><a href="http://ratio.uwayapply.com/Sl5KOkJNOFdKclc6L0otZlRm" class="on" target="new">남부대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KV2FOcldhJkpyVzovSi1mVGY=" class="on" target="new">송원대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOlcvSnJXOi9KLWZUZg==" class="on" target="new">전남대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11300511.html" class="on" target="new">조선대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11690581.html" class="on" target="new">호남대</a></li>
+								<li>호남신대</li>
 							</ul>
 						</td>
 					</tr>
-					
+
 					<tr>
 						<th>경북</th>
 						<td>
 							<ul>
-								
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10010671.html" class="on" target="new">가야대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KcldhVlc4SnJXOi9KLWZUZg==" class="on" target="new">경국대</a></li>
-							
-										<li>경운대</li>
-							
-										<li><a href="https://ibsi.kiu.ac.kr/ipsi_rate/rate_jungsi_real_new_251216.htm" class="on" target="new">경일대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KfGFNOjlKclc6L0otZlRm" class="on" target="new">금오공대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio40330561.html" class="on" target="new">김천대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10460951.html" class="on" target="new">대구가톨릭대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10440751.html" class="on" target="new">대구대</a></li>
-							
-										<li>대구예대</li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10160651.html" class="on" target="new">대구한의대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10480241.html" class="on" target="new">대신대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10540631.html" class="on" target="new">동국대(WISE)</a></li>
-							
-										<li><a href="https://haksa.dyu.ac.kr/manager/m_ibsi/ib_inweon/m_jeongsi_inweon.jsp?nyeondo=2026" class="on" target="new">동양대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KOi9yV2FgYnJKclc6L0otZlRm" class="on" target="new">신경주대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KOmJKclc6L0otZlRm" class="on" target="new">영남대</a></li>
-							
-										<li>영남신대</li>
-							
-										<li><a href="https://portal.uu.ac.kr/ext/competition.jsp" class="on" target="new">위덕대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11570721.html" class="on" target="new">한동대</a></li>
-								
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10010671.html" class="on" target="new">가야대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KcldhVlc4SnJXOi9KLWZUZg==" class="on" target="new">경국대</a></li>
+								<li>경운대</li>
+								<li><a href="https://ibsi.kiu.ac.kr/ipsi_rate/rate_jungsi_real_new_251216.htm" class="on" target="new">경일대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KfGFNOjlKclc6L0otZlRm" class="on" target="new">금오공대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio40330561.html" class="on" target="new">김천대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10460951.html" class="on" target="new">대구가톨릭대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10440751.html" class="on" target="new">대구대</a></li>
+								<li>대구예대</li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10160651.html" class="on" target="new">대구한의대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10480241.html" class="on" target="new">대신대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10540631.html" class="on" target="new">동국대(WISE)</a></li>
+								<li><a href="https://haksa.dyu.ac.kr/manager/m_ibsi/ib_inweon/m_jeongsi_inweon.jsp?nyeondo=2026" class="on" target="new">동양대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOi9yV2FgYnJKclc6L0otZlRm" class="on" target="new">신경주대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOmJKclc6L0otZlRm" class="on" target="new">영남대</a></li>
+								<li>영남신대</li>
+								<li><a href="https://portal.uu.ac.kr/ext/competition.jsp" class="on" target="new">위덕대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11570721.html" class="on" target="new">한동대</a></li>
 							</ul>
 						</td>
 					</tr>
-					
+
 					<tr>
 						<th>경남</th>
 						<td>
 							<ul>
-								
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10130531.html" class="on" target="new">경남대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10170861.html" class="on" target="new">경상국립대</a></li>
-							
-										<li>부산장신대</li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KYC9XJUpyVzovSi1mVGY=" class="on" target="new">인제대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KYDpMSnJXOi9KLWZUZg==" class="on" target="new">진주교대</a></li>
-							
-										<li><a href="https://ipsi.cs.ac.kr/ratio/2026/2.do" class="on" target="new">창신대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11350571.html" class="on" target="new">창원대</a></li>
-								
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10130531.html" class="on" target="new">경남대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10170861.html" class="on" target="new">경상국립대</a></li>
+								<li>부산장신대</li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KYC9XJUpyVzovSi1mVGY=" class="on" target="new">인제대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KYDpMSnJXOi9KLWZUZg==" class="on" target="new">진주교대</a></li>
+								<li><a href="https://ipsi.cs.ac.kr/ratio/2026/2.do" class="on" target="new">창신대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11350571.html" class="on" target="new">창원대</a></li>
 							</ul>
 						</td>
 					</tr>
-					
+
 					<tr>
 						<th>대구</th>
 						<td>
 							<ul>
-								
-										<li><a href="https://ratio.uwayapply.com/Sl5KOlc5SnJXOi9KLWZUZg==" class="on" target="new">경북대</a></li>
-							
-										<li><a href="http://ratio.uwayapply.com/Sl5KOk05SnJXOi9KLWZUZg==" class="on" target="new">계명대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KYDpXVkpyVzovSi1mVGY=" class="on" target="new">대구교대</a></li>
-								
+								<li><a href="https://ratio.uwayapply.com/Sl5KOlc5SnJXOi9KLWZUZg==" class="on" target="new">경북대</a></li>
+								<li><a href="http://ratio.uwayapply.com/Sl5KOk05SnJXOi9KLWZUZg==" class="on" target="new">계명대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KYDpXVkpyVzovSi1mVGY=" class="on" target="new">대구교대</a></li>
 							</ul>
 						</td>
 					</tr>
-					
+
 					<tr>
 						<th>부산</th>
 						<td>
 							<ul>
-								
-										<li><a href="https://ratio.uwayapply.com/Sl5KJjlKclc6L0otZlRm" class="on" target="new">경성대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KVyUmYTlKclc6L0otZlRm" class="on" target="new">고신대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio30050611.html" class="on" target="new">동명대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10570671.html" class="on" target="new">동서대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10591271.html" class="on" target="new">동아대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KOmBWSnJXOi9KLWZUZg==" class="on" target="new">동의대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10720341.html" class="on" target="new">부경대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10730521.html" class="on" target="new">부산가톨릭대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio20040261.html" class="on" target="new">부산교대</a></li>
-							
-										<li><a href="https://go.pusan.ac.kr/college_2016/pages/index.asp?p=18&ap=y&ct=2" class="on" target="new">부산대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10750461.html" class="on" target="new">부산외대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11020571.html" class="on" target="new">신라대</a></li>
-							
-										<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio30100261.html" class="on" target="new">영산대</a></li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KOmFNOUpyVzovSi1mVGY=" class="on" target="new">한국해양대</a></li>
-								
+								<li><a href="https://ratio.uwayapply.com/Sl5KJjlKclc6L0otZlRm" class="on" target="new">경성대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KVyUmYTlKclc6L0otZlRm" class="on" target="new">고신대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio30050611.html" class="on" target="new">동명대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10570671.html" class="on" target="new">동서대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10591271.html" class="on" target="new">동아대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOmBWSnJXOi9KLWZUZg==" class="on" target="new">동의대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10720341.html" class="on" target="new">부경대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10730521.html" class="on" target="new">부산가톨릭대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio20040261.html" class="on" target="new">부산교대</a></li>
+								<li><a href="https://go.pusan.ac.kr/college_2016/pages/index.asp?p=18&ap=y&ct=2" class="on" target="new">부산대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio10750461.html" class="on" target="new">부산외대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio11020571.html" class="on" target="new">신라대</a></li>
+								<li><a href="https://addon.jinhakapply.com/RatioV1/RatioH/Ratio30100261.html" class="on" target="new">영산대</a></li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOmFNOUpyVzovSi1mVGY=" class="on" target="new">한국해양대</a></li>
 							</ul>
 						</td>
 					</tr>
-					
+
 					<tr>
 						<th>울산</th>
 						<td>
 							<ul>
-								
-											<li><a href="http://ratio.uwayapply.com/Sl5KVzgmQzpKclc6L0otZlRm" class="on" target="new">울산대</a></li>
-								
+								<li><a href="http://ratio.uwayapply.com/Sl5KVzgmQzpKclc6L0otZlRm" class="on" target="new">울산대</a></li>
 							</ul>
 						</td>
 					</tr>
-					
+
 					<tr>
 						<th>제주</th>
 						<td>
 							<ul>
-								
-										<li>제주국제대</li>
-							
-										<li><a href="https://ratio.uwayapply.com/Sl5KOlc6L2AvSnJXOi9KLWZUZg==" class="on" target="new">제주대</a></li>
-								
+								<li>제주국제대</li>
+								<li><a href="https://ratio.uwayapply.com/Sl5KOlc6L2AvSnJXOi9KLWZUZg==" class="on" target="new">제주대</a></li>
 							</ul>
 						</td>
 					</tr>
-					
-					</tbody>
-				</table>
-			</div>
+
+				</tbody>
+			</table>
 		</div>
 	</div>
-	<!-- Footer -->
-	
-	<div>
+</div>
+
+<!-- Footer -->
+<div>
 	<!-- fixed_banner -->
-<!-- EPMO-6564 2023-11-16 -->
+	<!-- EPMO-6564 2023-11-16 -->
+</div>
 
-
-
-
-
-
-
-
-
-
+</body>
+</html>
