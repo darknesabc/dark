@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
@@ -6,13 +7,15 @@
 	<link rel="stylesheet" href="https://www.etoos.com/common/css/etoos_main2021.css?v=37690.85" type="text/css">
 	<script type="text/javascript" src="https://www.etoos.com/common/js/jquery/jquery-1.8.3.min.js"></script>
 	<script language="JavaScript">var J$ = jQuery.noConflict();</script>
+
 	<style type="text/css">
+		/* ===== 기존 스타일 (원본) ===== */
 		body,h1,h2,h3,h4,th,td,p {margin:0;padding:0;color:#666;font-family:'돋움',dotum, sans-serif;font-size:12px;font-weight:normal;}
 		li{list-style:none}
 		table{border-collapse:collapse;border-spacing:0}
 		img {border:none;}
-		
-		.pop_susi_competition .phead{height:70px;border-bottom:1px dotted #777;}
+
+		.pop_susi_competition .phead{height:70px;border-bottom:1px dotted #777; position:relative;}
 		.pop_susi_competition .phead h1{font-size:22px;color:#000;font-weight:bold;line-height:70px;padding-left:30px;letter-spacing:-1px;font-family:'Malgun Gothic','맑은고딕','돋움',dotum, sans-serif;}
 		.pop_susi_competition .phead strong{color:#1fa8a6;}
 		.pop_susi_competition .phead .btn_close{display:block;position:absolute;right:6px;top:0;width:70px;height:70px;background:url(//images/bg/images/btn_close.gif) no-repeat center center;text-indent:-1000em;}
@@ -20,19 +23,116 @@
 		.pop_susi_competition .pbody .top_txt{margin-top:10px;padding:5px 0;font-size:12px;color:#999;line-height:20px;}
 		.pop_susi_competition .pbody .top_txt strong{color:#666;}
 		.pop_susi_competition .pbody .btn_down a{display:inline-block;margin-bottom:20px;padding:0 20px;color:#fff;font-size:12px;font-weight:bold;background:#12938e;line-height:30px;text-decoration:none;}
-		.pop_susi_competition .pbody .tbl{border:1px solid #222;}
-		.pop_susi_competition .pbody table{width:100%;}
-		.pop_susi_competition .pbody table thead th{height:50px;color:#000;border-bottom:1px solid #ccc;border-left:1px solid #e3e3e3;background:#f3f3f3;}
-		.pop_susi_competition .pbody table tbody th{width:100px;border-bottom:1px solid #e3e3e3;color:#000;}
-		.pop_susi_competition .pbody table tbody td{padding:40px;background:#fff;border-left:1px solid #e3e3e3;border-bottom:1px solid #e3e3e3;}
-		.pop_susi_competition .pbody table tbody td ul{margin:0 -20px;}
-		.pop_susi_competition .pbody table tbody td li{float:left;width:125px;color:#666;line-height:25px;}
-		.pop_susi_competition .pbody table tbody td li a{color:#666;line-height:25px;font-weight:bold;}
-		.pop_susi_competition .pbody table tbody td li a.on{color:#1fa8a6;}
+
+		/* ====== 여기부터 레이아웃 변경 핵심(CARD GRID) ====== */
+
+		/* 테두리/표 느낌 제거 */
+		.pop_susi_competition .pbody .tbl{border:0;}
+		.pop_susi_competition .pbody table{width:100%; border-collapse:separate; border-spacing:0;}
+
+		/* thead(지역/대학명 헤더) 숨김 */
+		.pop_susi_competition .pbody table thead{display:none;}
+
+		/* tbody를 그리드로: 지역 카드들이 2열로 배치됨 */
+		.pop_susi_competition .pbody table tbody{
+			display:grid;
+			grid-template-columns:repeat(2, minmax(0, 1fr));
+			gap:16px;
+		}
+
+		/* 각 지역 row(tr)를 카드로 */
+		.pop_susi_competition .pbody table tbody tr{
+			display:block;
+			border:1px solid #ddd;
+			border-radius:12px;
+			background:#fff;
+			overflow:hidden;
+		}
+
+		/* 지역 제목(th) */
+		.pop_susi_competition .pbody table tbody th{
+			display:block;
+			width:auto;
+			padding:14px 16px;
+			background:#f6f7f8;
+			border:0;
+			font-weight:bold;
+			color:#111;
+			font-size:14px;
+		}
+
+		/* 대학 목록(td) */
+		.pop_susi_competition .pbody table tbody td{
+			display:block;
+			padding:12px 16px 16px;
+			border:0;
+			background:#fff;
+		}
+
+		/* ul/li를 pill 목록처럼 */
+		.pop_susi_competition .pbody table tbody td ul{
+			margin:0;
+			padding:0;
+			display:flex;
+			flex-wrap:wrap;
+			gap:8px 10px;
+		}
+
+		.pop_susi_competition .pbody table tbody td li{
+			float:none;
+			width:auto;
+			line-height:1;
+			color:#666;
+		}
+
+		/* 링크가 있는 대학: pill 버튼 */
+		.pop_susi_competition .pbody table tbody td li a{
+			display:inline-block;
+			padding:8px 10px;
+			border:1px solid #e5e5e5;
+			border-radius:999px;
+			text-decoration:none;
+			font-weight:600;
+			color:#555;
+			background:#fff;
+			line-height:1;
+		}
+
+		.pop_susi_competition .pbody table tbody td li a:hover{
+			border-color:#cfcfcf;
+		}
+
+		.pop_susi_competition .pbody table tbody td li a.on{
+			border-color:#1fa8a6;
+			color:#1fa8a6;
+		}
+
+		/* 링크가 없는 대학(li에 a가 없음): 점선 pill */
+		.pop_susi_competition .pbody table tbody td li{
+			padding:0;
+		}
+		.pop_susi_competition .pbody table tbody td li.no-link{
+			display:inline-block;
+			padding:8px 10px;
+			border:1px dashed #ddd;
+			border-radius:999px;
+			color:#999;
+			line-height:1;
+		}
+
+		/* 반응형: 화면 좁으면 1열 */
+		@media (max-width: 900px){
+			.pop_susi_competition .pbody{padding:0 16px;}
+			.pop_susi_competition .pbody table tbody{
+				grid-template-columns:1fr;
+			}
+		}
 	</style>
 </head>
+
 <body> <!-- 팝업 가로사이즈 760px -->
 <div id="etoosHead" style="display:none;"></div>
+
 	<div class="pop_susi_competition" style="padding-bottom:20px">
 		<div class="phead"> 
 			<h1>2026학년도 정시 지원 <strong>실시간 경쟁률</strong></h1>
@@ -610,6 +710,7 @@
 	<div>
 	<!-- fixed_banner -->
 <!-- EPMO-6564 2023-11-16 -->
+
 
 
 
